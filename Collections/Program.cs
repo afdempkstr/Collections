@@ -8,6 +8,35 @@ namespace Collections
     {
         static void Main(string[] args)
         {
+            foreach (int current in Iterator(5))
+            {
+                Console.WriteLine(current);
+            }
+
+            var list = new List<int>();
+            list.AddRange(Enumerable.Range(0, 10));
+
+            foreach (var i in list)
+            {
+                Console.Write($"{i} ");
+            }
+            Console.WriteLine();
+
+            var even = list.Where(i => i % 2 == 0).Reverse();
+
+            foreach (var i in even)
+            {
+                Console.Write($"{i} ");
+            }
+            Console.WriteLine();
+
+            foreach (var i in list)
+            {
+                Console.Write($"{i} ");
+            }
+
+            Console.ReadKey();
+
             var dict = new Dictionary<string, int>();
 
             dict.Add("kostas", 2105555555);
@@ -72,6 +101,16 @@ namespace Collections
         static void IncByRef(ref int x)
         {
             x = x + 1;
+        }
+
+        static IEnumerable<int> Iterator(int count)
+        {
+            int i = 0;
+            while (i < count)
+            {
+                yield return i++;
+            }
+            yield break;
         }
 
     }
