@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Collections
@@ -25,28 +26,34 @@ namespace Collections
 
             var s = dict["george"];
 
-            int testValue;
-            bool exists = dict.TryGetValue("test", out testValue);
-            testValue = 3;
+            Console.WriteLine();
 
+            dict.Add("gianna", 2004);
+            dict.Add("gus", 35423423);
 
-            var badIdea = new Dictionary<object, object>();
-            var goodOldDays = new System.Collections.Hashtable();
+            var q = from item in dict
+                    where item.Key.StartsWith("g")
+                    orderby item.Key
+                    select item;
 
-            int a = 5;
-            Increment(a);
-            Console.WriteLine(a);
-            IncByRef(ref a);
-            Console.WriteLine(a);
+            foreach (var qq in q)
+            {
+                Console.Write($"{qq.Key} => {qq.Value} ");
+            }
 
+            Console.WriteLine();
+
+            var q2 = dict
+                .Where(item => item.Key.StartsWith("g"))
+                .OrderBy(item => item.Key)
+                .Select(item => item);
+
+            foreach (var qq in q2)
+            {
+                Console.Write($"{qq.Key} => {qq.Value} ");
+            }
 
             Console.Read();
-
-
-
-
-
-
         }
 
         static void Show<T>(List<T> theList)
